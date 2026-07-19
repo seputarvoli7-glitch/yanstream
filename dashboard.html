@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard - YANSTREAM</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#111827;
+    color:#fff;
+    margin:20px;
+}
+.card{
+    background:#1f2937;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:6px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+}
+input{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border-radius:6px;
+    border:none;
+    box-sizing:border-box;
+}
+</style>
+</head>
+<body>
+
+<h2>YANSTREAM Dashboard</h2>
+
+<div class="card">
+<h3>Upload Video</h3>
+<input type="file">
+</div>
+
+<div class="card">
+<h3>RTMP URL</h3>
+<input type="text" placeholder="Masukkan RTMP URL">
+</div>
+
+<div class="card">
+<h3>Stream Key</h3>
+<input type="text" placeholder="Masukkan Stream Key">
+</div>
+
+<button>▶ Start Live</button>
+<button>■ Stop Live</button>
+
+</body>
+</html>
