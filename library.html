@@ -27,11 +27,25 @@ text-decoration:none;
 
 <h2>🎥 Video Library</h2>
 
-<div class="card">
+<div class="card" id="videoList">
 Belum ada video.
 </div>
 
 <p><a href="dashboard.html">⬅ Kembali ke Dashboard</a></p>
 
+  <script>
+let videos = JSON.parse(localStorage.getItem("videos")) || [];
+
+const videoList = document.getElementById("videoList");
+
+if (videos.length > 0) {
+    videoList.innerHTML = "";
+
+    videos.forEach(function(video, index) {
+        videoList.innerHTML +=
+        "<p>" + (index + 1) + ". " + video + "</p>";
+    });
+}
+</script>
 </body>
 </html>
