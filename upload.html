@@ -57,7 +57,8 @@ text-decoration:none;
 </div>
 <script>
 function uploadVideo() {
-    const file = document.getElementById("videoFile").files[0];
+    const fileInput = document.getElementById("videoFile");
+    const file = fileInput.files[0];
 
     if (!file) {
         alert("Silakan pilih video terlebih dahulu.");
@@ -71,6 +72,9 @@ function uploadVideo() {
     localStorage.setItem("videos", JSON.stringify(videos));
 
     alert("Video berhasil ditambahkan ke Library.");
+
+    // Reset input file
+    fileInput.value = "";
 }
 </script>
 </body>
