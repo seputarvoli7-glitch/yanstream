@@ -42,9 +42,22 @@ if (videos.length > 0) {
     videoList.innerHTML = "";
 
     videos.forEach(function(video, index) {
-        videoList.innerHTML +=
-        "<p>" + (index + 1) + ". " + video + "</p>";
-    });
+    videoList.innerHTML += `
+    <div style="margin-bottom:15px;">
+        <p>${index + 1}. ${video}</p>
+
+        <button onclick="pilihVideo('${video}')">
+        ▶ Gunakan untuk Live
+        </button>
+
+        <hr>
+    </div>
+    `;
+});
+}
+    function pilihVideo(video) {
+    localStorage.setItem("selectedVideo", video);
+    alert(video + " dipilih untuk Live.");
 }
 </script>
 </body>
