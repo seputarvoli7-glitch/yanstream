@@ -64,8 +64,11 @@ input{
 <button onclick="simpan()">💾 Simpan</button>
 </div>
 
-<button>▶ Start Live</button>
-<button>■ Stop Live</button>
+<p><b>Status Live:</b> <span id="status">🔴 Offline</span></p>
+
+<button onclick="startLive()">▶ Start Live</button>
+
+<button onclick="stopLive()">■ Stop Live</button>
 
  <script>
 document.getElementById("rtmp").value =
@@ -87,6 +90,19 @@ function simpan() {
 
     alert("Data berhasil disimpan");
 }
+
+     function startLive() {
+    document.getElementById("status").innerHTML = "🟢 Online";
+    localStorage.setItem("status", "🟢 Online");
+}
+
+function stopLive() {
+    document.getElementById("status").innerHTML = "🔴 Offline";
+    localStorage.setItem("status", "🔴 Offline");
+}
+
+document.getElementById("status").innerHTML =
+    localStorage.getItem("status") || "🔴 Offline";
 </script>   
 </body>
 </html>
