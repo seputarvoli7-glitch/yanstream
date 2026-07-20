@@ -47,10 +47,14 @@ if (videos.length > 0) {
         <p>${index + 1}. ${video}</p>
 
         <button onclick="pilihVideo('${video}')">
-        ▶ Gunakan untuk Live
-        </button>
+▶ Gunakan untuk Live
+</button>
 
-        <hr>
+<button onclick="hapusVideo(${index})">
+🗑 Hapus
+</button>
+
+<hr>
     </div>
     `;
 });
@@ -59,6 +63,16 @@ if (videos.length > 0) {
     localStorage.setItem("selectedVideo", video);
     alert(video + " dipilih untuk Live.");
 }
+
+   function hapusVideo(index) {
+    let videos = JSON.parse(localStorage.getItem("videos")) || [];
+
+    videos.splice(index, 1);
+
+    localStorage.setItem("videos", JSON.stringify(videos));
+
+    location.reload();
+} 
 </script>
 </body>
 </html>
