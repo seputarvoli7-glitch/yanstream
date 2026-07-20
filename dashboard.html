@@ -56,7 +56,12 @@ input{
 
 <div class="card">
   <h3>🎥 Video Dipilih</h3>
+<h3>Pengaturan Video</h3>
 
+<label>
+<input type="checkbox" id="loopVideo">
+ Loop Video
+</label>
 <p id="selectedVideo">
 Belum ada video dipilih
 </p>  
@@ -113,6 +118,13 @@ document.getElementById("status").innerHTML =
 if (selectedVideo) {
     document.getElementById("selectedVideo").innerHTML = selectedVideo;
 }
+
+    document.getElementById("loopVideo").checked =
+    localStorage.getItem("loopVideo") === "true";
+
+document.getElementById("loopVideo").addEventListener("change", function () {
+    localStorage.setItem("loopVideo", this.checked);
+}); 
 </script>   
 </body>
 </html>
