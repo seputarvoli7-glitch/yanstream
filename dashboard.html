@@ -55,6 +55,11 @@ input{
 
 
 <div class="card">
+  <h3>🎥 Video Dipilih</h3>
+
+<p id="selectedVideo">
+Belum ada video dipilih
+</p>  
 <h3>RTMP URL</h3>
 <input type="text" id="rtmp" placeholder="Masukkan RTMP URL">
 
@@ -103,6 +108,11 @@ function stopLive() {
 
 document.getElementById("status").innerHTML =
     localStorage.getItem("status") || "🔴 Offline";
+     const selectedVideo = localStorage.getItem("selectedVideo");
+
+if (selectedVideo) {
+    document.getElementById("selectedVideo").innerHTML = selectedVideo;
+}
 </script>   
 </body>
 </html>
