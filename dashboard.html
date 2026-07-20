@@ -56,16 +56,37 @@ input{
 
 <div class="card">
 <h3>RTMP URL</h3>
-<input type="text" placeholder="Masukkan RTMP URL">
-</div>
+<input type="text" id="rtmp" placeholder="Masukkan RTMP URL">
 
-<div class="card">
 <h3>Stream Key</h3>
-<input type="text" placeholder="Masukkan Stream Key">
+<input type="text" id="streamkey" placeholder="Masukkan Stream Key">
+
+<button onclick="simpan()">💾 Simpan</button>
 </div>
 
 <button>▶ Start Live</button>
 <button>■ Stop Live</button>
 
+ <script>
+document.getElementById("rtmp").value =
+localStorage.getItem("rtmp") || "";
+
+document.getElementById("streamkey").value =
+localStorage.getItem("streamkey") || "";
+
+function simpan() {
+    localStorage.setItem(
+        "rtmp",
+        document.getElementById("rtmp").value
+    );
+
+    localStorage.setItem(
+        "streamkey",
+        document.getElementById("streamkey").value
+    );
+
+    alert("Data berhasil disimpan");
+}
+</script>   
 </body>
 </html>
