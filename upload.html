@@ -47,15 +47,31 @@ text-decoration:none;
 
 <div class="box">
 
-<input type="file" accept="video/*">
+<input type="file" id="videoFile" accept="video/*">
 
-<button>Upload</button>
-
+<button onclick="uploadVideo()">Upload</button>
 <br><br>
 
 <a href="dashboard.html">⬅ Kembali ke Dashboard</a>
 
 </div>
+<script>
+function uploadVideo() {
+    const file = document.getElementById("videoFile").files[0];
 
+    if (!file) {
+        alert("Silakan pilih video terlebih dahulu.");
+        return;
+    }
+
+    let videos = JSON.parse(localStorage.getItem("videos")) || [];
+
+    videos.push(file.name);
+
+    localStorage.setItem("videos", JSON.stringify(videos));
+
+    alert("Video berhasil ditambahkan ke Library.");
+}
+</script>
 </body>
 </html>
