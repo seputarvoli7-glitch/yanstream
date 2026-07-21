@@ -39,7 +39,11 @@ input{
 </head>
 <body>
 
-<h2>YANSTREAM Dashboard</h2>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+    <h2>YANSTREAM Dashboard</h2>
+
+    <button onclick="logout()">🚪 Logout</button>
+</div>
 <hr>
 
 <h3>Menu</h3>
@@ -166,6 +170,20 @@ document.getElementById("loopVideo").addEventListener("change", function () {
 if (localStorage.getItem("login") !== "true") {
     alert("Silakan login terlebih dahulu");
     location.href = "login.html";
+}
+</script>
+
+<script>
+function logout() {
+
+    if (confirm("Yakin ingin logout?")) {
+
+        localStorage.removeItem("login");
+
+        location.href = "login.html";
+
+    }
+
 }
 </script>
     
