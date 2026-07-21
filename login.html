@@ -62,12 +62,10 @@ a{
 
 <h2>YANSTREAM</h2>
 
-<input type="email" placeholder="Email">
+<input type="text" id="username" placeholder="Username">
 
-<input type="password" placeholder="Password">
-
-<button onclick="location.href='dashboard.html'">Masuk</button>
-
+<input type="password" id="password" placeholder="Password">
+<button onclick="login()">Masuk</button>
 <p style="text-align:center">
 Belum punya akun?<br>
 <a href="#">Daftar</a>
@@ -75,5 +73,32 @@ Belum punya akun?<br>
 
 </div>
 
+   <script>
+async function login() {
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("https://yanstream-production.up.railway.app/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            username,
+            password
+        })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        alert(data.message);
+        location.href = "dashboard.html";
+    } else {
+        alert(data.message);
+    }
+}
+</script> 
 </body>
 </html>
