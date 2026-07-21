@@ -82,26 +82,7 @@ alert("Login ditekan");
     try {
 
     const response = await fetch("https://yanstream-production.up.railway.app/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            username,
-            password
-        })
-    });
-
-    const data = await response.json();
-
-    alert(JSON.stringify(data));
-
-    if (data.success) {
-        alert(data.message);
-        location.href = "dashboard.html";
-    } else {
-        alert(data.message);
-    }
+        
 
 } catch (err) {
     alert("Error: " + err.message);
