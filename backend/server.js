@@ -1,17 +1,38 @@
-const http = require("http");
+const express = require("express");
 
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {
-        "Content-Type": "application/json"
-    });
+const app = express();
 
-    res.end(JSON.stringify({
-        status: "YANSTREAM Backend Online"
-    }));
+app.use(express.json());
+
+const ADMIN = {
+  username: "admin",
+  password: "yanstream123"
+};
+
+app.get("/", (req, res) => {
+  res.json({
+    status: "YANSTREAM Backend Online"
+  });
 });
 
-const PORT = process.env.PORT || 3000;
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
 
-server.listen(PORT, () => {
-    console.log("Server berjalan di port", PORT);
+  if (username === ADMIN.username && password === ADMIN.password) {
+    return res.json({
+      success: true,
+      message: "Login berhasil"
+    });
+  }
+
+  res.status(401).json({
+    success: false,
+    message: "Username atau password salah"
+  });
+});
+
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`Server berjalan di port ${PORT}`);
 });
