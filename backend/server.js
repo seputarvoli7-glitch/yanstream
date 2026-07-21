@@ -1,10 +1,21 @@
 const express = require("express");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+const storage = multer.diskStorage({
+    destination: "uploads/",
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname);
+    }
+});
+
+const upload = multer({ storage });
 const ADMIN = {
   username: "admin",
   password: "yanstream123"
@@ -30,6 +41,23 @@ app.post("/login", (req, res) => {
     success: false,
     message: "Username atau password salah"
   });
+});
+
+app.post("/upload", upload.single("video"), (req, res) => {
+
+    if (!req.file) {
+        return res.status(400).json({
+            success: false,
+            message: "Tidak ada video yang diupload"
+        });
+    }
+
+    res.json({
+        success: true,
+        message: "Video berhasil diupload",
+        filename: req.file.filename
+    });
+
 });
 
 const PORT = process.env.PORT || 8080;
