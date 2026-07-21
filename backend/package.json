@@ -1,0 +1,9 @@
+{
+  "name": "yanstream-backend",
+  "version": "1.0.0",
+  "description": "YANSTREAM Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
