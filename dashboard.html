@@ -111,7 +111,8 @@ function simpan() {
     localStorage.setItem("status", "🟢 Online");
 
     clearInterval(timer);
-
+    seconds = 0;
+document.getElementById("liveTimer").innerHTML = "00:00:00";
     timer = setInterval(function () {
         seconds++;
 
