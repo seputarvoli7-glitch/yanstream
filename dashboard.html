@@ -109,11 +109,27 @@ function simpan() {
      function startLive() {
     document.getElementById("status").innerHTML = "🟢 Online";
     localStorage.setItem("status", "🟢 Online");
+
+    clearInterval(timer);
+
+    timer = setInterval(function () {
+        seconds++;
+
+        let jam = String(Math.floor(seconds / 3600)).padStart(2, "0");
+        let menit = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+        let detik = String(seconds % 60).padStart(2, "0");
+
+        document.getElementById("liveTimer").innerHTML =
+            jam + ":" + menit + ":" + detik;
+
+    }, 1000);
 }
 
 function stopLive() {
     document.getElementById("status").innerHTML = "🔴 Offline";
     localStorage.setItem("status", "🔴 Offline");
+
+    clearInterval(timer);
 }
 
 document.getElementById("status").innerHTML =
