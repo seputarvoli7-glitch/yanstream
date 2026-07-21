@@ -55,20 +55,24 @@ input{
 
 
 <div class="card">
-  <h3>🎥 Video Dipilih</h3>
+  <div class="card">
 
-<p id="selectedVideo">
-Belum ada video dipilih
-</p>
+<h3>🎥 Informasi Live</h3>
 
-<h3>Pengaturan Video</h3>
+<p><b>Video:</b> <span id="selectedVideo">Belum ada video dipilih</span></p>
 
-<label style="display:flex; align-items:center; gap:8px;">
-    <input type="checkbox" id="loopVideo" style="width:18px; height:18px; margin:0;">
+<p><b>Loop:</b> <span id="loopStatus">Nonaktif</span></p>
+
+<p><b>Status:</b> <span id="status">🔴 Offline</span></p>
+
+<p><b>Durasi:</b> <span id="liveTimer">00:00:00</span></p>
+
+<label style="display:flex;align-items:center;gap:8px;">
+    <input type="checkbox" id="loopVideo" style="width:18px;height:18px;margin:0;">
     <span>Loop Video</span>
 </label>
 
-<br><br>
+</div>
 
 <h3>RTMP URL</h3>
 <input type="text" id="rtmp" placeholder="Masukkan RTMP URL">
@@ -145,9 +149,17 @@ if (selectedVideo) {
 document.getElementById("loopVideo").checked =
     localStorage.getItem("loopVideo") === "true";
 
+document.getElementById("loopStatus").innerHTML =
+    document.getElementById("loopVideo").checked
+        ? "🔁 Aktif"
+        : "⏹️ Nonaktif";
+     
 // Menyimpan status Loop Video saat diubah
 document.getElementById("loopVideo").addEventListener("change", function () {
     localStorage.setItem("loopVideo", this.checked);
+
+    document.getElementById("loopStatus").innerHTML =
+        this.checked ? "🔁 Aktif" : "⏹️ Nonaktif";
 });
 </script>   
 </body>
