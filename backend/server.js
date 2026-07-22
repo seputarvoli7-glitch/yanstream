@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
-
+const fs = require("fs");
 const app = express();
 
 app.use(cors());
@@ -59,7 +59,25 @@ app.post("/upload", upload.single("video"), (req, res) => {
     });
 
 });
+app.get("/videos", (req, res) => {
 
+    fs.readdir("uploads", (err, files) => {
+
+        if (err) {
+            return res.status(500).json({
+                success: false,
+                message: "Gagal membaca folder uploads"
+            });
+        }
+
+        res.json({
+            success: true,
+            videos: files
+        });
+
+    });
+
+});
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
