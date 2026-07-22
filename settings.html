@@ -52,17 +52,54 @@ text-decoration:none;
 
 <div class="card">
 
-<label>Nama Pengguna</label>
-<input type="text" placeholder="Masukkan nama">
+<label>RTMP URL</label>
+<input type="text" id="rtmp" placeholder="rtmp://...">
 
-<label>Email</label>
-<input type="email" placeholder="Masukkan email">
+<label>Stream Key</label>
+<input type="password" id="streamKey" placeholder="Masukkan Stream Key">
 
-<button>Simpan</button>
+<label>Resolusi</label>
+<input type="text" id="resolution" value="1280x720">
 
+<label>Bitrate (kbps)</label>
+<input type="number" id="bitrate" value="3500">
+<button onclick="saveSettings()">💾 Simpan</button>
 </div>
 
 <p><a href="dashboard.html">⬅ Kembali ke Dashboard</a></p>
 
+  <script>
+
+document.getElementById("rtmp").value =
+localStorage.getItem("rtmp") || "";
+
+document.getElementById("streamKey").value =
+localStorage.getItem("streamKey") || "";
+
+document.getElementById("resolution").value =
+localStorage.getItem("resolution") || "1280x720";
+
+document.getElementById("bitrate").value =
+localStorage.getItem("bitrate") || "3500";
+
+function saveSettings(){
+
+    localStorage.setItem("rtmp",
+        document.getElementById("rtmp").value);
+
+    localStorage.setItem("streamKey",
+        document.getElementById("streamKey").value);
+
+    localStorage.setItem("resolution",
+        document.getElementById("resolution").value);
+
+    localStorage.setItem("bitrate",
+        document.getElementById("bitrate").value);
+
+    alert("Pengaturan berhasil disimpan");
+
+}
+
+</script>
 </body>
 </html>
