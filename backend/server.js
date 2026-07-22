@@ -78,6 +78,28 @@ app.get("/videos", (req, res) => {
     });
 
 });
+
+app.delete("/delete/:filename", (req, res) => {
+
+    const filePath = path.join("uploads", req.params.filename);
+
+    fs.unlink(filePath, (err) => {
+
+        if (err) {
+            return res.status(404).json({
+                success: false,
+                message: "Video tidak ditemukan"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Video berhasil dihapus"
+        });
+
+    });
+
+});
 const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
