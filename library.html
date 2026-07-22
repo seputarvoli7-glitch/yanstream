@@ -4,75 +4,82 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Video Library - YANSTREAM</title>
+
 <style>
 body{
-font-family:Arial,sans-serif;
-background:#111827;
-color:white;
-margin:20px;
+    font-family:Arial,sans-serif;
+    background:#111827;
+    color:white;
+    margin:20px;
 }
-.card{
-background:#1f2937;
-padding:15px;
-border-radius:10px;
-margin-bottom:10px;
+
+.box{
+    background:#1f2937;
+    padding:20px;
+    border-radius:10px;
 }
+
+.video{
+    padding:10px;
+    border-bottom:1px solid #374151;
+}
+
 a{
-color:#60a5fa;
-text-decoration:none;
+    color:#60a5fa;
+    text-decoration:none;
 }
 </style>
+
 </head>
 <body>
 
-<h2>🎥 Video Library</h2>
+<h2>🎬 Video Library</h2>
 
-<div class="card" id="videoList">
-Belum ada video.
+<div class="box" id="videoList">
+Memuat daftar video...
 </div>
 
-<p><a href="dashboard.html">⬅ Kembali ke Dashboard</a></p>
+<br>
 
-  <script>
-let videos = JSON.parse(localStorage.getItem("videos")) || [];
+<a href="dashboard.html">⬅ Kembali ke Dashboard</a>
 
-const videoList = document.getElementById("videoList");
+<script>
 
-if (videos.length > 0) {
-    videoList.innerHTML = "";
+async function loadVideos(){
 
-    videos.forEach(function(video, index) {
-    videoList.innerHTML += `
-    <div style="margin-bottom:15px;">
-        <p>${index + 1}. ${video}</p>
+    try{
 
-        <button onclick="pilihVideo('${video}')">
-▶ Gunakan untuk Live
-</button>
+        const response = await fetch("https://yanstream-production.up.railway.app/videos");
 
-<button onclick="hapusVideo(${index})">
-🗑 Hapus
-</button>
+        const data = await response.json();
 
-<hr>
-    </div>
-    `;
-});
+        if(data.success){
+
+            let html="";
+
+            data.videos.forEach(video=>{
+                html += `<div class="video">📹 ${video}</div>`;
+            });
+
+            document.getElementById("videoList").innerHTML = html || "Belum ada video.";
+
+        }else{
+
+            document.getElementById("videoList").innerHTML = data.message;
+
+        }
+
+    }catch(err){
+
+        document.getElementById("videoList").innerHTML = err.message;
+
+    }
+
 }
-    function pilihVideo(video) {
-    localStorage.setItem("selectedVideo", video);
-    alert(video + " dipilih untuk Live.");
-}
 
-   function hapusVideo(index) {
-    let videos = JSON.parse(localStorage.getItem("videos")) || [];
+loadVideos();
 
-    videos.splice(index, 1);
-
-    localStorage.setItem("videos", JSON.stringify(videos));
-
-    location.reload();
-} 
 </script>
+
 </body>
 </html>
