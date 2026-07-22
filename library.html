@@ -63,7 +63,9 @@ async function loadVideos(){
         <div class="video">
             📹 ${video}
             <br><br>
-            <button onclick="deleteVideo('${video}')">🗑 Hapus</button>
+            <button onclick="previewVideo('${video}')">▶️ Preview</button>
+
+<button onclick="deleteVideo('${video}')">🗑 Hapus</button>
         </div>
     `;
 
@@ -116,7 +118,48 @@ loadVideos();
 
 } 
 
+    function previewVideo(filename){
+
+    const video =
+        document.getElementById("previewPlayer");
+
+    video.src =
+        "https://yanstream-production.up.railway.app/uploads/" +
+        encodeURIComponent(filename);
+
+    document.getElementById("previewBox").style.display =
+        "block";
+
+}
+
+function closePreview(){
+
+    const video =
+        document.getElementById("previewPlayer");
+
+    video.pause();
+
+    video.src = "";
+
+    document.getElementById("previewBox").style.display =
+        "none";
+
+}
 </script>
 
+<div id="previewBox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);">
+
+<div style="max-width:800px;margin:40px auto;background:#1f2937;padding:20px;border-radius:10px;">
+
+<video id="previewPlayer" controls width="100%"></video>
+
+<br><br>
+
+<button onclick="closePreview()">Tutup</button>
+
+</div>
+
+</div>
+    
 </body>
 </html>
