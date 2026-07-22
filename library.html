@@ -65,6 +65,8 @@ async function loadVideos(){
             <br><br>
             <button onclick="previewVideo('${video}')">▶️ Preview</button>
 
+<button onclick="startLive('${video}')">🔴 Start Live</button>
+
 <button onclick="deleteVideo('${video}')">🗑 Hapus</button>
         </div>
     `;
@@ -145,6 +147,27 @@ function closePreview(){
         "none";
 
 }
+
+   async function startLive(filename){
+
+    const rtmp = localStorage.getItem("rtmp");
+    const streamKey = localStorage.getItem("streamKey");
+    const resolution = localStorage.getItem("resolution");
+    const bitrate = localStorage.getItem("bitrate");
+
+    if(!rtmp || !streamKey){
+        alert("Silakan isi RTMP URL dan Stream Key di Settings.");
+        return;
+    }
+
+    alert(
+        "Video: " + filename +
+        "\nRTMP: " + rtmp +
+        "\nResolusi: " + resolution +
+        "\nBitrate: " + bitrate + " kbps"
+    );
+
+} 
 </script>
 
 <div id="previewBox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);">
